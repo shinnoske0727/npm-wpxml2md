@@ -98,10 +98,23 @@ class WordPressXmlToMarkdown {
     if (!(stream)) {
       throw new Error('Failed to create the stream.')
     }
-
+    
+    
     const markdown = Converter.convert(post[ 'content:encoded' ][ 0 ], options)
+    stream.write('---\n', 'utf8')
+    stream.write(`title: ${post.title}\n`, 'utf8')
+    if(post.category) {
+      const category = post.category[0]['$'].nicename
+      stream.write(`category: ${decodeURI(category)}\n`, 'utf8')
+    }
+    if(post['wp:meta_key']) {
+      const meta = post.
+      stream.write(`meta: ${decodeURI(category)}\n`, 'utf8')
+    }
+    stream.write('---\n\n', 'utf8')
     stream.write('# ' + post.title + '\n\n', 'utf8')
     stream.write(markdown, 'utf8')
+    
   }
 
   /**
