@@ -107,9 +107,9 @@ class WordPressXmlToMarkdown {
       const category = post.category[0]['$'].nicename
       stream.write(`category: ${decodeURI(category)}\n`, 'utf8')
     }
-    if(post['wp:meta_key']) {
-      const meta = post.
-      stream.write(`meta: ${decodeURI(category)}\n`, 'utf8')
+    if(post['wp:postmeta']) {
+      const meta = post['wp:postmeta'];
+      stream.write(`meta: ${decodeURI(meta)}\n`, 'utf8')
     }
     stream.write('---\n\n', 'utf8')
     stream.write('# ' + post.title + '\n\n', 'utf8')
